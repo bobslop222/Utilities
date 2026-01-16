@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Admin - Quellen verwalten</title>
+        <style>
+            .admin-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 30px 20px;
+            }
+
+            .admin-section {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+                margin-bottom: 30px;
+            }
+
+            @media (max-width: 900px) {
+                .admin-section {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .admin-form, .admin-list {
+                background: var(--bg-card);
+                padding: 25px;
+                border-radius: 8px;
+                border: 1px solid var(--border);
+            }
+
+            .admin-form h2, .admin-list h2 {
+                margin-bottom: 20px;
+                font-size: 1.3em;
+                color: #ffffff;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group label {
+                display: block;
+                font-weight: 600;
+                margin-bottom: 5px;
+                color: var(--text);
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                font-family: inherit;
+                font-size: 0.95em;
+                background-color: var(--bg-input);
+                color: var(--text);
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: var(--accent);
+                box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+            }
+
+            .form-group textarea {
+                resize: vertical;
+                min-height: 80px;
+            }
+
+            .form-buttons {
+                display: flex;
+                gap: 10px;
+            }
+
+            .btn {
+                flex: 1;
+                padding: 10px;
+                border: none;
+                border-radius: 4px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: background-color 0.2s;
+            }
+
+            .btn-primary {
+                background-color: var(--accent);
+                color: white;
+            }
+
+            .btn-primary:hover {
+                background-color: #0052a3;
+            }
+
+            .btn-secondary {
+                background-color: #333;
+                color: var(--text);
+            }
+
+            .btn-secondary:hover {
+                background-color: #444;
+            }
+
+            .btn-danger {
+                background-color: #ff4444;
+                color: white;
+            }
+
+            .btn-danger:hover {
+                background-color: #cc0000;
+            }
+
+            .btn-success {
+                background-color: #44aa44;
+                color: white;
+            }
+
+            .btn-success:hover {
+                background-color: #338833;
+            }
+
+            .source-list-item {
+                background: var(--bg-input);
+                padding: 15px;
+                border-radius: 4px;
+                margin-bottom: 10px;
+                border-left: 4px solid var(--accent);
+            }
+
+            .source-list-item h4 {
+                margin: 0 0 5px 0;
+                color: var(--accent);
+            }
+
+            .source-list-item p {
+                margin: 3px 0;
+                font-size: 0.9em;
+                color: #b0b0b0;
+            }
+
+            .source-list-item a {
+                color: #669acc;
+                text-decoration: none;
+            }
+
+            .source-list-item a:hover {
+                color: var(--accent);
+            }
+
+            .source-list-item .source-actions {
+                margin-top: 10px;
+                display: flex;
+                gap: 5px;
+            }
+
+            .source-list-item .source-actions button {
+                flex: 1;
+                font-size: 0.85em;
+            }
+
+            .export-import {
+                background: var(--bg-card);
+                padding: 15px;
+                border-radius: 8px;
+                margin-top: 30px;
+                border: 1px solid var(--border);
+            }
+
+            .export-import h3 {
+                margin-bottom: 15px;
+                color: #ffffff;
+            }
+
+            .export-import p {
+                color: var(--text);
+            }
+
+            .export-import textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                font-family: monospace;
+                font-size: 0.85em;
+                min-height: 120px;
+                margin-bottom: 10px;
+                background-color: var(--bg-input);
+                color: var(--text);
+            }
+
+            .export-import .buttons {
+                display: flex;
+                gap: 10px;
+            }
+
+            .export-import button {
+                flex: 1;
+            }
+
+            .admin-header {
+                background: var(--bg-card);
+                padding: 20px;
+                margin-bottom: 20px;
+                border-radius: 8px;
+                border: 1px solid var(--border);
+                border-left: 5px solid #ff9900;
+            }
+
+            .admin-header h1 {
+                margin: 0 0 10px 0;
+                color: #ffffff;
+            }
+
+            .admin-header p {
+                color: #b0b0b0;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <div class="header-content">
+                <h1>⚙️ Admin Panel</h1>
+                <p class="subtitle">Verwalte deine Quellen</p>
+            </div>
+        </div>
+
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1>Quellenverwaltung</h1>
+                <p>Diese Seite ist nicht öffentlich. Bearbeite hier deine Quellen.</p>
+            </div>
+
+            <div class="admin-section">
+                <div class="admin-form">
+                    <h2>Neue Quelle hinzufügen</h2>
+                    <form id="sourceForm">
+                        <div class="form-group">
+                            <label for="title">Titel *</label>
+                            <input type="text" id="title" placeholder="z.B. Wikipedia" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="url">URL *</label>
+                            <input type="url" id="url" placeholder="https://example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Kategorie</label>
+                            <input type="text" id="category" placeholder="z.B. Programmierung" value="Allgemein">
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Notizen</label>
+                            <textarea id="notes" placeholder="Beschreibung oder wichtige Punkte..."></textarea>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn btn-primary">Hinzufügen</button>
+                            <button type="button" class="btn btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="admin-list">
+                    <h2>Quellen (<span id="source-count">0</span>)</h2>
+                    <div id="sources-list"></div>
+                </div>
+            </div>
+
+            <div class="export-import">
+                <h3>Export / Import</h3>
+                <p>Exportiere deine Quellen als JSON oder importiere sie von einer Datei.</p>
+                <div class="buttons" style="margin-bottom: 15px;">
+                    <button class="btn btn-success" onclick="exportSources()">📥 Exportieren</button>
+                    <button class="btn btn-success" onclick="document.getElementById('importFile').click()">📤 Importieren</button>
+                </div>
+                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importSources(event)">
+                
+                <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
+                    <strong>Hinweis:</strong> Öffne deine Website in einem anderen Browser/Gerät und diese Daten werden synchronisiert, wenn du sie importierst.
+                </p>
+            </div>
+        </div>
+
+        <script src="admin.js"></script>
+    </body>
+</html>
